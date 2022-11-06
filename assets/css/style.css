@@ -8,13 +8,87 @@
    v2.0 | 20110126
    License: none (public domain)
    ========================================================================== */
-html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p,
-blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img,
-ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center,
-dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody,
-tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure,
-figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary,
-time, mark, audio, video {
+html,
+body,
+div,
+span,
+applet,
+object,
+iframe,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+pre,
+a,
+abbr,
+acronym,
+address,
+big,
+cite,
+code,
+del,
+dfn,
+em,
+img,
+ins,
+kbd,
+q,
+s,
+samp,
+small,
+strike,
+strong,
+sub,
+sup,
+tt,
+var,
+b,
+u,
+i,
+center,
+dl,
+dt,
+dd,
+ol,
+ul,
+li,
+fieldset,
+form,
+label,
+legend,
+table,
+caption,
+tbody,
+tfoot,
+thead,
+tr,
+th,
+td,
+article,
+aside,
+canvas,
+details,
+embed,
+figure,
+figcaption,
+footer,
+header,
+hgroup,
+menu,
+nav,
+output,
+ruby,
+section,
+summary,
+time,
+mark,
+audio,
+video {
   margin: 0;
   padding: 0;
   border: 0;
@@ -24,17 +98,30 @@ time, mark, audio, video {
 }
 
 /* HTML5 display-role reset for older browsers */
-article, aside, details, figcaption, figure,
-footer, header, hgroup, menu, nav, section {
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+menu,
+nav,
+section {
   display: block;
 }
 
 /* Force scrollbar */
-html { overflow-y: scroll; }
+html {
+  overflow-y: scroll;
+}
 
 /* Align radios and text inputs with their label */
 
-input[type='radio'] { vertical-align: text-bottom; }
+input[type='radio'] {
+  vertical-align: text-bottom;
+}
 
 /* Hand cursor on clickable input elements */
 label,
@@ -50,7 +137,9 @@ strong {
   font-size: inherit;
 }
 
-em { font-style: italic; }
+em {
+  font-style: italic;
+}
 
 img {
   width: 100%;
@@ -66,8 +155,13 @@ sup {
   line-height: 0;
 }
 
-sup { top: -.7em; }
-sub { bottom: -.25em; }
+sup {
+  top: -.7em;
+}
+
+sub {
+  bottom: -.25em;
+}
 
 /* 1.2. Clear Fix
    ========================== */
@@ -78,8 +172,13 @@ sub { bottom: -.25em; }
   content: " ";
 }
 
-.cf:after { clear: both; }
-.cf { *zoom: 1; }
+.cf:after {
+  clear: both;
+}
+
+.cf {
+  *zoom: 1;
+}
 
 /*for all*/
 body {
@@ -87,9 +186,9 @@ body {
   font-family: sans-serif;
 }
 
-a { 
+a {
   display: inline-block;
-  text-decoration: none; 
+  text-decoration: none;
 }
 
 li {
@@ -100,55 +199,150 @@ li {
 /*for wrapper*/
 .wrapper {
   max-width: 1360px;
-  width: 86%; 
+  width: 86%;
   margin: 0 auto;
 }
-/*=================================
-  Header styling starts here
-=================================*/
 
-
-
-
-
-
-/*=================================
-  Header styling ends here
-=================================*/  
+*,
+*::before,
+*::after {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
 
 /*=================================
   main styling starts here
 =================================*/
+.container { background-color: #f6f6f6; }
 
+.movie-list {
+  margin-top: 15px;
+  display: flex;
+  flex-wrap: wrap;
+}
 
+.review-list {
+  margin: 0 2% 20px 0;
+  border-radius: 10px;
+  position: relative;
+  flex-basis: 23.5%;
+  box-shadow: 2px 2px 10px #727272;
+}
 
+.review-list:nth-child(4n) { margin-right: 0; }
 
+.detail-page {
+  width: 100%;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  text-indent: -9999px;
+}
 
+.image-div { position: relative; }
+.image-div img { border-radius: 10px 10px 0 0; }
 
+.publication-date {
+  padding: 6px;
+  border-radius: 3px;
+  position: absolute;
+  top: 10px;
+  right: 3%;
+  background-color: #454545;
+  color: #fff;
+  font-size: 14px;
+  font-weight: 600;
+  opacity: 0.85;
+}
+
+.content { padding: 15px; }
+
+.title {
+  margin-bottom: 15px;
+  color: #797e73;
+  font-weight: 600;
+}
+
+.summary {
+  margin-bottom: 15px;
+  color: #727272;
+  font-size: 13px;
+  line-height: 22px;
+}
+
+.author {
+  margin: 10px 0;
+  color: #363636;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.page-cta {
+  margin: 5px;
+  border-radius: 3px;
+  background: transparent;
+  width: 35px;
+  height: 35px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.page-cta {
+  padding: 0 14px;
+  color: #000;
+  font-weight: 600;
+  font-size: 18px;
+}
+
+.page-cta.active  {
+  color: blue;
+  text-decoration: underline;
+}
+
+.prev-btn,
+.next-btn {
+  display: inline-block;
+  text-indent: -9999px;
+}
+
+.prev-btn::before,
+.next-btn::before {
+  content: "\f104";
+  width: 35px;
+  height: 35px;
+  border-radius: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #454545;
+  color: #fff;
+  font-size: 23px;
+  font-family: "FontAwesome";
+  text-indent: 0;
+  float: left;
+}
+
+.next-btn::before { content: "\f105"; }
+
+.prev-btn.disabled,
+.prev-btn.disabled {
+  pointer-events: none;
+  cursor: pointer;
+}
 
 
 /*=================================
   main styling ends here
 =================================*/
 
-/*=================================
-  footer styling starts here
-=================================*/ 
-
-
-
-
-
-
-
- /*=================================
-  footer styling ends here
-=================================*/ 
-
 /*media query starts*/
 /*media query for 995px starts here*/
-@media only screen and (max-width: 995px) {
-
-
-
-}  
+@media only screen and (max-width: 995px) {}
