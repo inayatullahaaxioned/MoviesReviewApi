@@ -9,22 +9,25 @@ var MovieList = document.querySelector('.movie-list'),
   limit = 10,
   counter = 1;
 
+//first page 10 review calling
 ShowMovie(offset);
+
+//function for fetching review list 
 function ShowMovie(offset) {
-  console.log(offset);
   fetch(`https://api.nytimes.com/svc/movies/v2/reviews/all.json?api-key=KggA9THGRHUHTICnDwdbmo8kaCpGru27&offset=${offset}`)
     .then(function (response) {
-      if(response.status === 429){
+      if (response.status === 429) {
         alert("Too many request, Please wait for a minute");
-        // return offset;
       }
-      if(response.status === 200){
+      if (response.status === 200) {
         return response.json();
       }
     })
     .then(function (res) {
+      console.log(res);
       var results = res.results;
       MovieList.innerHTML = "";
+      //movie review list appended here
       for (let i = 0; i < limit; i++) {
         var movie = results[i];
         var title = movie.display_title,
@@ -47,12 +50,12 @@ function ShowMovie(offset) {
             </div>`
         MovieList.appendChild(reviewList);
       }
-      // if(offset <= (totalMovie - limit)){}
       var pagination = document.createElement('ul'),
         pageAction = document.querySelector('.pagination');
       if (pageAction) {
         pageAction.parentElement.removeChild(pageAction);
       };
+      //pagination appending 
       pagination.className = "pagination";
       pagination.innerHTML = `<li class="page-btn">
                     <a href="#FIXME" class="page-cta prev-btn" title="Previous page">Previous Page</a>
@@ -74,49 +77,61 @@ function ShowMovie(offset) {
                   </li>`;
 
       wrapper.appendChild(pagination);
-      var prevBtn = document.querySelector('.prev-btn'),
-        nextBtn = document.querySelector('.next-btn'),
-        lastPageBtn = document.querySelector('.lastpage'),
-        hasMore = document.querySelector('.has-more'),
-        clickPageNo = document.querySelector('.click-page');
-
-        prevBtn.addEventListener('click', function (e) {
-        e.preventDefault();
-        offset -= limit;
-        ShowMovie(offset);
-        counter--;
-      });
-      if (counter == 1) {
-        prevBtn.remove();
-      }
-      if (counter == 20) {
-        hasMore.remove();
-        lastPageBtn.remove();
-        nextBtn.remove();
-        clickPageNo.remove();
-      }
-
-      nextBtn.addEventListener('click', function (e) {
-        e.preventDefault();
-        offset += limit;
-        console.log(offset);
-        ShowMovie(offset);
-        counter++;
-      });
-
-      lastPageBtn.addEventListener('click', function (e) {
-        e.preventDefault();
-        offset = totalMovie - limit;
-        ShowMovie(offset);
-        counter = totalMovie/limit;
-      })
-
-      var pageNoBtn = document.querySelector('.click-page');
-      pageNoBtn.addEventListener('click', function (e) {
-        e.preventDefault();
-        offset += limit;
-        ShowMovie(offset);
-        counter++;
-      })
     })
+    .catch(function (error) {
+      alert(error);
+    });
 };
+//grabbing pagination element
+var prevBtn = document.querySelector('.prev-btn'),
+  nextBtn = document.querySelector('.next-btn'),
+  lastPageBtn = document.querySelector('.lastpage'),
+  hasMore = document.querySelector('.has-more'),
+  clickPageNo = document.querySelector('.click-page'),
+  body = document.querySelector('body');
+
+body.addEventListener('click', function (e) {
+  if (e.target.classList.contains('next-btn')) {
+    e.preventDefault();
+    offset += limit;
+    ShowMovie(offset);
+    counter++;
+    console.log('check');
+  }
+  //last page event
+  if (e.target.classList.contains('last-page')) {
+    e.preventDefault();
+    offset = totalMovie - limit;
+    ShowMovie(offset);
+    counter = totalMovie / limit;
+  }
+  //previous button event
+  if (e.target.classList.contains('prev-btn')) {
+    e.preventDefault();
+    offset -= limit;
+    ShowMovie(offset);
+    counter--;
+    console.log('prev btn');
+  }
+  //page no event added
+  if (e.target.classList.contains('click-page')) {
+    e.preventDefault();
+    offset += limit;
+    ShowMovie(offset);
+    counter++;
+  };
+});
+
+//removing next arrow btn when we are on last page
+if (counter === 20) {
+  hasMore.remove();
+  lastPageBtn.remove();
+  nextBtn.remove();
+  clickPageNo.remove();
+}
+
+//on page hiding the prev arrow btn
+if (prevBtn) {
+  console.log(prevBtn);
+  prevBtn.remove();
+}
